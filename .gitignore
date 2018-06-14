@@ -5,7 +5,7 @@
 .project
 .git
 .idea
-.iml
+*.iml
 .bin
 .settting
 /build/
