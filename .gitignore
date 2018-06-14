@@ -1,0 +1,12 @@
+/target/
+.svn
+.settings
+.classpath
+.project
+.git
+.idea
+.iml
+.bin
+.settting
+/build/
+/out/

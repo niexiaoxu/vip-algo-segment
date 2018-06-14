@@ -1,0 +1,926 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vip.nlp.database.segment.dao.AppUserMapper">
+  <resultMap id="BaseResultMap" type="com.vip.nlp.database.segment.model.AppUser">
+    <id column="APP_USER_ID" jdbcType="INTEGER" property="appUserId" />
+    <result column="APP_ID" jdbcType="VARCHAR" property="appId" />
+    <result column="AUTHORIZATION_ID" jdbcType="INTEGER" property="authorizationId" />
+    <result column="SUBSCRIBE" jdbcType="VARCHAR" property="subscribe" />
+    <result column="OPENID" jdbcType="VARCHAR" property="openid" />
+    <result column="NICKNAME" jdbcType="VARCHAR" property="nickname" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="LANGUAGE" jdbcType="VARCHAR" property="language" />
+    <result column="CITY" jdbcType="VARCHAR" property="city" />
+    <result column="PROVINCE" jdbcType="VARCHAR" property="province" />
+    <result column="COUNTRY" jdbcType="VARCHAR" property="country" />
+    <result column="HEADIMGURL" jdbcType="VARCHAR" property="headimgurl" />
+    <result column="SUBSCRIBE_TIME" jdbcType="VARCHAR" property="subscribeTime" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="GROUPID" jdbcType="INTEGER" property="groupid" />
+    <result column="TAGID_LIST" jdbcType="VARCHAR" property="tagidList" />
+    <result column="UNIONID" jdbcType="VARCHAR" property="unionid" />
+    <result column="INS_TIME" jdbcType="TIMESTAMP" property="insTime" />
+    <result column="IS_DEL" jdbcType="INTEGER" property="isDel" />
+    <result column="IS_VALID" jdbcType="INTEGER" property="isValid" />
+    <result column="UPDATE_TIME" jdbcType="VARCHAR" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    APP_USER_ID, APP_ID, AUTHORIZATION_ID, SUBSCRIBE, OPENID, NICKNAME, SEX, LANGUAGE, 
+    CITY, PROVINCE, COUNTRY, HEADIMGURL, SUBSCRIBE_TIME, REMARK, GROUPID, TAGID_LIST, 
+    UNIONID, INS_TIME, IS_DEL, IS_VALID, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.vip.nlp.database.segment.model.AppUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from app_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from app_user
+    where APP_USER_ID = #{appUserId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from app_user
+    where APP_USER_ID = #{appUserId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vip.nlp.database.segment.model.AppUserExample">
+    delete from app_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vip.nlp.database.segment.model.AppUser">
+    insert into app_user (APP_USER_ID, APP_ID, AUTHORIZATION_ID, 
+      SUBSCRIBE, OPENID, NICKNAME, 
+      SEX, LANGUAGE, CITY, 
+      PROVINCE, COUNTRY, HEADIMGURL, 
+      SUBSCRIBE_TIME, REMARK, GROUPID, 
+      TAGID_LIST, UNIONID, INS_TIME, 
+      IS_DEL, IS_VALID, UPDATE_TIME
+      )
+    values (#{appUserId,jdbcType=INTEGER}, #{appId,jdbcType=VARCHAR}, #{authorizationId,jdbcType=INTEGER}, 
+      #{subscribe,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{headimgurl,jdbcType=VARCHAR}, 
+      #{subscribeTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{groupid,jdbcType=INTEGER}, 
+      #{tagidList,jdbcType=VARCHAR}, #{unionid,jdbcType=VARCHAR}, #{insTime,jdbcType=TIMESTAMP}, 
+      #{isDel,jdbcType=INTEGER}, #{isValid,jdbcType=INTEGER}, #{updateTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.vip.nlp.database.segment.model.AppUser">
+    insert into app_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="appUserId != null">
+        APP_USER_ID,
+      </if>
+      <if test="appId != null">
+        APP_ID,
+      </if>
+      <if test="authorizationId != null">
+        AUTHORIZATION_ID,
+      </if>
+      <if test="subscribe != null">
+        SUBSCRIBE,
+      </if>
+      <if test="openid != null">
+        OPENID,
+      </if>
+      <if test="nickname != null">
+        NICKNAME,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="language != null">
+        LANGUAGE,
+      </if>
+      <if test="city != null">
+        CITY,
+      </if>
+      <if test="province != null">
+        PROVINCE,
+      </if>
+      <if test="country != null">
+        COUNTRY,
+      </if>
+      <if test="headimgurl != null">
+        HEADIMGURL,
+      </if>
+      <if test="subscribeTime != null">
+        SUBSCRIBE_TIME,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="groupid != null">
+        GROUPID,
+      </if>
+      <if test="tagidList != null">
+        TAGID_LIST,
+      </if>
+      <if test="unionid != null">
+        UNIONID,
+      </if>
+      <if test="insTime != null">
+        INS_TIME,
+      </if>
+      <if test="isDel != null">
+        IS_DEL,
+      </if>
+      <if test="isValid != null">
+        IS_VALID,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="appUserId != null">
+        #{appUserId,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizationId != null">
+        #{authorizationId,jdbcType=INTEGER},
+      </if>
+      <if test="subscribe != null">
+        #{subscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null">
+        #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribeTime != null">
+        #{subscribeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null">
+        #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="tagidList != null">
+        #{tagidList,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null">
+        #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="insTime != null">
+        #{insTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null">
+        #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vip.nlp.database.segment.model.AppUserExample" resultType="java.lang.Long">
+    select count(*) from app_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update app_user
+    <set>
+      <if test="record.appUserId != null">
+        APP_USER_ID = #{record.appUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.appId != null">
+        APP_ID = #{record.appId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authorizationId != null">
+        AUTHORIZATION_ID = #{record.authorizationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.subscribe != null">
+        SUBSCRIBE = #{record.subscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openid != null">
+        OPENID = #{record.openid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null">
+        NICKNAME = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        SEX = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.language != null">
+        LANGUAGE = #{record.language,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        CITY = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null">
+        PROVINCE = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.country != null">
+        COUNTRY = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headimgurl != null">
+        HEADIMGURL = #{record.headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subscribeTime != null">
+        SUBSCRIBE_TIME = #{record.subscribeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupid != null">
+        GROUPID = #{record.groupid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tagidList != null">
+        TAGID_LIST = #{record.tagidList,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unionid != null">
+        UNIONID = #{record.unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insTime != null">
+        INS_TIME = #{record.insTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDel != null">
+        IS_DEL = #{record.isDel,jdbcType=INTEGER},
+      </if>
+      <if test="record.isValid != null">
+        IS_VALID = #{record.isValid,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update app_user
+    set APP_USER_ID = #{record.appUserId,jdbcType=INTEGER},
+      APP_ID = #{record.appId,jdbcType=VARCHAR},
+      AUTHORIZATION_ID = #{record.authorizationId,jdbcType=INTEGER},
+      SUBSCRIBE = #{record.subscribe,jdbcType=VARCHAR},
+      OPENID = #{record.openid,jdbcType=VARCHAR},
+      NICKNAME = #{record.nickname,jdbcType=VARCHAR},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      LANGUAGE = #{record.language,jdbcType=VARCHAR},
+      CITY = #{record.city,jdbcType=VARCHAR},
+      PROVINCE = #{record.province,jdbcType=VARCHAR},
+      COUNTRY = #{record.country,jdbcType=VARCHAR},
+      HEADIMGURL = #{record.headimgurl,jdbcType=VARCHAR},
+      SUBSCRIBE_TIME = #{record.subscribeTime,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      GROUPID = #{record.groupid,jdbcType=INTEGER},
+      TAGID_LIST = #{record.tagidList,jdbcType=VARCHAR},
+      UNIONID = #{record.unionid,jdbcType=VARCHAR},
+      INS_TIME = #{record.insTime,jdbcType=TIMESTAMP},
+      IS_DEL = #{record.isDel,jdbcType=INTEGER},
+      IS_VALID = #{record.isValid,jdbcType=INTEGER},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vip.nlp.database.segment.model.AppUser">
+    update app_user
+    <set>
+      <if test="appId != null">
+        APP_ID = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizationId != null">
+        AUTHORIZATION_ID = #{authorizationId,jdbcType=INTEGER},
+      </if>
+      <if test="subscribe != null">
+        SUBSCRIBE = #{subscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        OPENID = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        NICKNAME = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        LANGUAGE = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        COUNTRY = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null">
+        HEADIMGURL = #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribeTime != null">
+        SUBSCRIBE_TIME = #{subscribeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null">
+        GROUPID = #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="tagidList != null">
+        TAGID_LIST = #{tagidList,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null">
+        UNIONID = #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="insTime != null">
+        INS_TIME = #{insTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        IS_DEL = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null">
+        IS_VALID = #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where APP_USER_ID = #{appUserId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vip.nlp.database.segment.model.AppUser">
+    update app_user
+    set APP_ID = #{appId,jdbcType=VARCHAR},
+      AUTHORIZATION_ID = #{authorizationId,jdbcType=INTEGER},
+      SUBSCRIBE = #{subscribe,jdbcType=VARCHAR},
+      OPENID = #{openid,jdbcType=VARCHAR},
+      NICKNAME = #{nickname,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      LANGUAGE = #{language,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=VARCHAR},
+      COUNTRY = #{country,jdbcType=VARCHAR},
+      HEADIMGURL = #{headimgurl,jdbcType=VARCHAR},
+      SUBSCRIBE_TIME = #{subscribeTime,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      GROUPID = #{groupid,jdbcType=INTEGER},
+      TAGID_LIST = #{tagidList,jdbcType=VARCHAR},
+      UNIONID = #{unionid,jdbcType=VARCHAR},
+      INS_TIME = #{insTime,jdbcType=TIMESTAMP},
+      IS_DEL = #{isDel,jdbcType=INTEGER},
+      IS_VALID = #{isValid,jdbcType=INTEGER},
+      UPDATE_TIME = #{updateTime,jdbcType=VARCHAR}
+    where APP_USER_ID = #{appUserId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.vip.nlp.database.segment.model.AppUser">
+    <id column="APP_USER_ID" jdbcType="INTEGER" property="appUserId" />
+    <result column="APP_ID" jdbcType="VARCHAR" property="appId" />
+    <result column="AUTHORIZATION_ID" jdbcType="INTEGER" property="authorizationId" />
+    <result column="SUBSCRIBE" jdbcType="VARCHAR" property="subscribe" />
+    <result column="OPENID" jdbcType="VARCHAR" property="openid" />
+    <result column="NICKNAME" jdbcType="VARCHAR" property="nickname" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="LANGUAGE" jdbcType="VARCHAR" property="language" />
+    <result column="CITY" jdbcType="VARCHAR" property="city" />
+    <result column="PROVINCE" jdbcType="VARCHAR" property="province" />
+    <result column="COUNTRY" jdbcType="VARCHAR" property="country" />
+    <result column="HEADIMGURL" jdbcType="VARCHAR" property="headimgurl" />
+    <result column="SUBSCRIBE_TIME" jdbcType="VARCHAR" property="subscribeTime" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="GROUPID" jdbcType="INTEGER" property="groupid" />
+    <result column="TAGID_LIST" jdbcType="VARCHAR" property="tagidList" />
+    <result column="UNIONID" jdbcType="VARCHAR" property="unionid" />
+    <result column="INS_TIME" jdbcType="TIMESTAMP" property="insTime" />
+    <result column="IS_DEL" jdbcType="INTEGER" property="isDel" />
+    <result column="IS_VALID" jdbcType="INTEGER" property="isValid" />
+    <result column="UPDATE_TIME" jdbcType="VARCHAR" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    APP_USER_ID, APP_ID, AUTHORIZATION_ID, SUBSCRIBE, OPENID, NICKNAME, SEX, LANGUAGE, 
+    CITY, PROVINCE, COUNTRY, HEADIMGURL, SUBSCRIBE_TIME, REMARK, GROUPID, TAGID_LIST, 
+    UNIONID, INS_TIME, IS_DEL, IS_VALID, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.vip.nlp.database.segment.model.AppUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from app_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from app_user
+    where APP_USER_ID = #{appUserId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from app_user
+    where APP_USER_ID = #{appUserId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.vip.nlp.database.segment.model.AppUserExample">
+    delete from app_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.vip.nlp.database.segment.model.AppUser">
+    insert into app_user (APP_USER_ID, APP_ID, AUTHORIZATION_ID, 
+      SUBSCRIBE, OPENID, NICKNAME, 
+      SEX, LANGUAGE, CITY, 
+      PROVINCE, COUNTRY, HEADIMGURL, 
+      SUBSCRIBE_TIME, REMARK, GROUPID, 
+      TAGID_LIST, UNIONID, INS_TIME, 
+      IS_DEL, IS_VALID, UPDATE_TIME
+      )
+    values (#{appUserId,jdbcType=INTEGER}, #{appId,jdbcType=VARCHAR}, #{authorizationId,jdbcType=INTEGER}, 
+      #{subscribe,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{headimgurl,jdbcType=VARCHAR}, 
+      #{subscribeTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{groupid,jdbcType=INTEGER}, 
+      #{tagidList,jdbcType=VARCHAR}, #{unionid,jdbcType=VARCHAR}, #{insTime,jdbcType=TIMESTAMP}, 
+      #{isDel,jdbcType=INTEGER}, #{isValid,jdbcType=INTEGER}, #{updateTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.vip.nlp.database.segment.model.AppUser">
+    insert into app_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="appUserId != null">
+        APP_USER_ID,
+      </if>
+      <if test="appId != null">
+        APP_ID,
+      </if>
+      <if test="authorizationId != null">
+        AUTHORIZATION_ID,
+      </if>
+      <if test="subscribe != null">
+        SUBSCRIBE,
+      </if>
+      <if test="openid != null">
+        OPENID,
+      </if>
+      <if test="nickname != null">
+        NICKNAME,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="language != null">
+        LANGUAGE,
+      </if>
+      <if test="city != null">
+        CITY,
+      </if>
+      <if test="province != null">
+        PROVINCE,
+      </if>
+      <if test="country != null">
+        COUNTRY,
+      </if>
+      <if test="headimgurl != null">
+        HEADIMGURL,
+      </if>
+      <if test="subscribeTime != null">
+        SUBSCRIBE_TIME,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="groupid != null">
+        GROUPID,
+      </if>
+      <if test="tagidList != null">
+        TAGID_LIST,
+      </if>
+      <if test="unionid != null">
+        UNIONID,
+      </if>
+      <if test="insTime != null">
+        INS_TIME,
+      </if>
+      <if test="isDel != null">
+        IS_DEL,
+      </if>
+      <if test="isValid != null">
+        IS_VALID,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="appUserId != null">
+        #{appUserId,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizationId != null">
+        #{authorizationId,jdbcType=INTEGER},
+      </if>
+      <if test="subscribe != null">
+        #{subscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null">
+        #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribeTime != null">
+        #{subscribeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null">
+        #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="tagidList != null">
+        #{tagidList,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null">
+        #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="insTime != null">
+        #{insTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null">
+        #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.vip.nlp.database.segment.model.AppUserExample" resultType="java.lang.Long">
+    select count(*) from app_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update app_user
+    <set>
+      <if test="record.appUserId != null">
+        APP_USER_ID = #{record.appUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.appId != null">
+        APP_ID = #{record.appId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authorizationId != null">
+        AUTHORIZATION_ID = #{record.authorizationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.subscribe != null">
+        SUBSCRIBE = #{record.subscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openid != null">
+        OPENID = #{record.openid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null">
+        NICKNAME = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        SEX = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.language != null">
+        LANGUAGE = #{record.language,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        CITY = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null">
+        PROVINCE = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.country != null">
+        COUNTRY = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headimgurl != null">
+        HEADIMGURL = #{record.headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subscribeTime != null">
+        SUBSCRIBE_TIME = #{record.subscribeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupid != null">
+        GROUPID = #{record.groupid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tagidList != null">
+        TAGID_LIST = #{record.tagidList,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unionid != null">
+        UNIONID = #{record.unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insTime != null">
+        INS_TIME = #{record.insTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDel != null">
+        IS_DEL = #{record.isDel,jdbcType=INTEGER},
+      </if>
+      <if test="record.isValid != null">
+        IS_VALID = #{record.isValid,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update app_user
+    set APP_USER_ID = #{record.appUserId,jdbcType=INTEGER},
+      APP_ID = #{record.appId,jdbcType=VARCHAR},
+      AUTHORIZATION_ID = #{record.authorizationId,jdbcType=INTEGER},
+      SUBSCRIBE = #{record.subscribe,jdbcType=VARCHAR},
+      OPENID = #{record.openid,jdbcType=VARCHAR},
+      NICKNAME = #{record.nickname,jdbcType=VARCHAR},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      LANGUAGE = #{record.language,jdbcType=VARCHAR},
+      CITY = #{record.city,jdbcType=VARCHAR},
+      PROVINCE = #{record.province,jdbcType=VARCHAR},
+      COUNTRY = #{record.country,jdbcType=VARCHAR},
+      HEADIMGURL = #{record.headimgurl,jdbcType=VARCHAR},
+      SUBSCRIBE_TIME = #{record.subscribeTime,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      GROUPID = #{record.groupid,jdbcType=INTEGER},
+      TAGID_LIST = #{record.tagidList,jdbcType=VARCHAR},
+      UNIONID = #{record.unionid,jdbcType=VARCHAR},
+      INS_TIME = #{record.insTime,jdbcType=TIMESTAMP},
+      IS_DEL = #{record.isDel,jdbcType=INTEGER},
+      IS_VALID = #{record.isValid,jdbcType=INTEGER},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.vip.nlp.database.segment.model.AppUser">
+    update app_user
+    <set>
+      <if test="appId != null">
+        APP_ID = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizationId != null">
+        AUTHORIZATION_ID = #{authorizationId,jdbcType=INTEGER},
+      </if>
+      <if test="subscribe != null">
+        SUBSCRIBE = #{subscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        OPENID = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        NICKNAME = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        LANGUAGE = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        COUNTRY = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null">
+        HEADIMGURL = #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribeTime != null">
+        SUBSCRIBE_TIME = #{subscribeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null">
+        GROUPID = #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="tagidList != null">
+        TAGID_LIST = #{tagidList,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null">
+        UNIONID = #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="insTime != null">
+        INS_TIME = #{insTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        IS_DEL = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null">
+        IS_VALID = #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where APP_USER_ID = #{appUserId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vip.nlp.database.segment.model.AppUser">
+    update app_user
+    set APP_ID = #{appId,jdbcType=VARCHAR},
+      AUTHORIZATION_ID = #{authorizationId,jdbcType=INTEGER},
+      SUBSCRIBE = #{subscribe,jdbcType=VARCHAR},
+      OPENID = #{openid,jdbcType=VARCHAR},
+      NICKNAME = #{nickname,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      LANGUAGE = #{language,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=VARCHAR},
+      COUNTRY = #{country,jdbcType=VARCHAR},
+      HEADIMGURL = #{headimgurl,jdbcType=VARCHAR},
+      SUBSCRIBE_TIME = #{subscribeTime,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      GROUPID = #{groupid,jdbcType=INTEGER},
+      TAGID_LIST = #{tagidList,jdbcType=VARCHAR},
+      UNIONID = #{unionid,jdbcType=VARCHAR},
+      INS_TIME = #{insTime,jdbcType=TIMESTAMP},
+      IS_DEL = #{isDel,jdbcType=INTEGER},
+      IS_VALID = #{isValid,jdbcType=INTEGER},
+      UPDATE_TIME = #{updateTime,jdbcType=VARCHAR}
+    where APP_USER_ID = #{appUserId,jdbcType=INTEGER}
+  </update>
+</mapper>
